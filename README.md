@@ -1,7 +1,9 @@
 freeswitch-docker-compose
 ============
 
-This are docker-compose files for building 1.8 version of Freeswitch from sources. 
+This are docker-compose files for building 1.10 version of Freeswitch from sources.
+
+If you need to build 1.8, just switch to 1.8 branch for this git repository, or change 1.10 to 1.8 and buster to stretch in Dockerfile.
 
 I took modules.conf from minimal configuration and if you need to add any module you can add them there, just do not forget about requirements and off cause to load it after by updating modules.conf.xml.
 
@@ -19,5 +21,6 @@ git clone https://github.com/os11k/freeswitch-docker-compose.git
 git clone https://github.com/signalwire/freeswitch.git
 cp -a ./freeswitch/conf/minimal ./freeswitch-docker-compose/freeswitch/conf
 cd ./freeswitch-docker-compose/
+#git checkout v1.8 # uncomment beginning of this line to build 1.8
 docker-compose up -d --build
 ```
