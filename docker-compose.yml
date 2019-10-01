@@ -1,0 +1,14 @@
+version: '2'
+services:
+   freeswitch:
+     hostname: freeswitch
+     container_name: freeswitch
+     network_mode: "host"
+     restart: always
+     build: ./freeswitch
+     logging:
+       options:
+         max-size: 50m
+     volumes:
+      - ./freeswitch/conf:/usr/local/freeswitch/conf
+     tty: true
