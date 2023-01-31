@@ -34,7 +34,7 @@ make && make install && \
 ldconfig && \
 \
 cd /usr/src/ && \
-git clone https://github.com/signalwire/freeswitch.git && \
+git clone https://github.com/signalwire/freeswitch.git -bv1.10 freeswitch && \
 cd freeswitch && \
 git config pull.rebase true && \
 #Here you can build your Freeswitch on specific commit, it is allways good practice to do so
