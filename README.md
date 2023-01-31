@@ -22,6 +22,5 @@ git clone https://github.com/os11k/freeswitch-docker-compose.git
 git clone https://github.com/signalwire/freeswitch.git
 cp -a ./freeswitch/conf/minimal ./freeswitch-docker-compose/freeswitch/conf
 cd ./freeswitch-docker-compose/
-#git checkout v1.8 # uncomment beginning of this line to build 1.8
 docker-compose up -d --build
 ```
