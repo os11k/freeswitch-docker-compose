@@ -1,9 +1,9 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 COPY ./modules.conf /modules.conf
 
 RUN apt-get update && \
-DEBIAN_FRONTEND=noninteractive apt-get -y install git build-essential pkg-config uuid-dev zlib1g-dev libjpeg-dev libsqlite3-dev libcurl4-openssl-dev libpcre3-dev libspeexdsp-dev libldns-dev libedit-dev libtiff5-dev yasm libopus-dev libsndfile1-dev unzip libavformat-dev libswscale-dev libavresample-dev liblua5.2-dev liblua5.2-0 cmake libpq-dev unixodbc-dev autoconf automake ntpdate libxml2-dev libpq-dev libpq5 &&\
+DEBIAN_FRONTEND=noninteractive apt-get -y install git build-essential pkg-config uuid-dev zlib1g-dev libjpeg-dev libsqlite3-dev libcurl4-openssl-dev libpcre3-dev libspeexdsp-dev libldns-dev libedit-dev libtiff5-dev yasm libopus-dev libsndfile1-dev unzip libavformat-dev libswscale-dev libswresample-dev liblua5.2-dev liblua5.2-0 cmake libpq-dev unixodbc-dev autoconf automake ntpdate libxml2-dev libpq-dev libpq5 libspeex-dev &&\
 \
 cd /usr/src/ && \
 git clone https://github.com/signalwire/libks.git && \
