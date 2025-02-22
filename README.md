@@ -1,21 +1,34 @@
-freeswitch-docker-compose
-============
+# Freeswitch Docker Compose
 
-These are docker-compose files for building the 1.10 version of Freeswitch from source code.
+These are Docker Compose files for building Freeswitch 1.10 from source.
 
-I took modules.conf from the minimal configuration, and if you need to add any modules, you can add them there, just do not forget about the requirements and, of course, to load it afterwards by updating modules.conf.xml.
+I took `modules.conf` from the minimal configuration. If you need to add any modules, you can do so there—just remember the requirements and to load them afterward by updating `modules.conf.xml`.
 
-Keep in mind that this docker-compose is using the host network, so do not forget to firewall your system properly before putting this into production.
+Keep in mind that this setup uses the host network, so ensure your system is properly firewalled before putting it into production.
 
-If your VPS is behind NAT (e.g. Amazon EC2), do not forget to set bind_server_ip, external_rtp_ip, and external_sip_ip as described here:
+## Configuration for NAT (e.g., Amazon EC2)
 
-https://freeswitch.org/confluence/display/FREESWITCH/Amazon+EC2
+If your VPS is behind NAT, update the following files:
 
-Credits:
-https://gist.github.com/cyrenity/96cc1ad7979b719b1c684f90aa0f526d
-
-### Usage
+### Update `freeswitch/Dockerfile`
+```diff
+-CMD ["/usr/local/freeswitch/bin/freeswitch", "-nonat"]
++CMD ["/usr/local/freeswitch/bin/freeswitch"]
 ```
+
+### Update `freeswitch/conf/vars.xml`
+```diff
++  <X-PRE-PROCESS cmd="set" data="bind_server_ip=YOUR-EXTERNAL-IP"/>
++  <X-PRE-PROCESS cmd="set" data="external_rtp_ip=YOUR-EXTERNAL-IP"/>
++  <X-PRE-PROCESS cmd="set" data="external_sip_ip=YOUR-EXTERNAL-IP"/>
+```
+
+For more details, refer to the official documentation:
+[Amazon EC2 - FreeSWITCH](https://freeswitch.org/confluence/display/FREESWITCH/Amazon+EC2)
+
+## Usage
+
+```sh
 apt-get update && apt-get upgrade -y && apt-get install docker-compose -y
 cd /usr/src
 git clone https://github.com/os11k/freeswitch-docker-compose.git
@@ -24,3 +37,8 @@ cp -a ./freeswitch/conf/minimal ./freeswitch-docker-compose/freeswitch/conf
 cd ./freeswitch-docker-compose/
 docker-compose up -d --build
 ```
+
+## Credits
+
+Based on a guide by [cyrenity](https://gist.github.com/cyrenity/96cc1ad7979b719b1c684f90aa0f526d).
+
